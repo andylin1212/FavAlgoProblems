@@ -73,6 +73,8 @@ function twoNumberSumFirstSort(array, target) {
 }
 
 
+//Test Cases
+
 let test1 = twoNumberSumWithMap([3, 5, -4, 8, 11, 1, -1, 6], 10)   //[11, -1]
 let test2 = twoNumberSumFirstSort([3, 5, -4, 8, 11, 1, -1, 6], 10)  //[-1, 11]
 

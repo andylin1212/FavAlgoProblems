@@ -39,6 +39,8 @@ function arrayOfProducts(array) {
 }
 
 
+//Test cases
+
 let test1 = arrayOfProducts([9, 3, 2, 1, 9, 5, 3, 2])  // [1620, 4860, 7290, 14580, 1620, 2916, 4860, 7290]
 let test2 = arrayOfProducts([-1, 2, 4, 3, 2])          // [48, -24, -12, -16, -24]
 let test3 = arrayOfProducts([-1, -1, -1])              // [1, 1, 1]
