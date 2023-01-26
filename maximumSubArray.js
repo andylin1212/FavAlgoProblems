@@ -17,7 +17,7 @@ subarray with the largest sum, and return its sum.
   [30, -20] is a net positive contribution to potential result
 */
 
-var maxSubArray = function(nums) {
+function maxSubArray (nums) {
   //initialize maxSum to first value
   let maxSum = nums[0];
 
@@ -34,6 +34,7 @@ var maxSubArray = function(nums) {
   return maxSum;
 };
 
+//Test Cases
 
 let test1 = maxSubArray([5, 4, -1, 7, 8])     // 23
 let test2 = maxSubArray([30, -20, 50, 4])     // 64
