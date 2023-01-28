@@ -11,7 +11,6 @@ keep track of visited set because there might be a cycle
 */
 
 /*
-Solution 1:
 O(Course + Prereq) time: nodes + edges time because we visit every node by moving along each edge
 O(course) for space
 */
@@ -61,16 +60,6 @@ function canFinish(numCourses, prerequisites) {
   return true;
 };
 
-/*
-Solution 2:
-Topological sort
-
-*/
-
-function canFinish(numCourses, prerequisites) {
-
-
-};
 
 //Test cases
 
