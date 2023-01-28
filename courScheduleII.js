@@ -40,5 +40,27 @@ function findOrder (numCourses, prerequisites) {
   return result;
 };
 
+//helper function outside, need to pass all ds such as visited set
+function exploreCourses (preMap, course, visited, cycle, result) {
+  //set base case
+  if (cycle.has(course)) return false;
+  //if visited dont want to directly return false, we just want to continue
+  if (visited.has(course)) return true;
 
-//Test Case
+  //start visiting
+  cycle.add(course)
+
+  //for all prereqs, want to explore the course
+  for (let pre of preMap[course]) {
+      if (!exploreCourses(preMap, pre, visited, cycle, result)) return false
+  }
+
+  //if no cycle detected, remove from visiting cycle
+  cycle.delete(course)
+  //add to visited
+  visited.add(course)
+  //add to result
+  result.push(course)
+  //and continue
+  return true;
+}
