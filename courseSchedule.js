@@ -31,6 +31,7 @@ function canFinish(numCourses, prerequisites) {
 
 
   //helper func for dfs of each course
+  //declared function inside canFinish so no need to pass additional ds such as visited set
   function canFinishCourse(crs) {
       //base cases: 1. if we visited already, we failed, theres a loop, 2. if course has no prereqs we must be able to take this course, so return true
       if (visited.has(crs)) return false;

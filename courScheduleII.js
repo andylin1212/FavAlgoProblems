@@ -5,13 +5,39 @@ For example, the pair [0, 1], indicates that to take course 0 you have to first 
 Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
 
 
-Topological sort
+Concept Check:
+Difference from courseschedule in the output
+II is returning ordering of course you should take to finish all courses
+
+Topological Sort 101
 
 */
 
-function canFinish(numCourses, prerequisites) {
+//O(Course + Prereques) time  nodes + edges because we are visiting all nodes along all edges
+//O(course) space
 
+function findOrder (numCourses, prerequisites) {
+  //build adjacency list of preqs (adjancency map)
+  let preMap = Array(numCourses).fill().map(() => [])
+  for (let [crs, pre] of prerequisites) {
+      preMap[crs].push(pre)
+  }
 
+  //a course has 3 possible states
+  //unvisited ->rs not added to result or cycle check
+  //visiting -> crs not added to result, but added to cycle check
+  //visited -> crs has been added to result
+  let result = [];
+  let visited = new Set();
+  let cycle = new Set();
+
+  //iterate through course, if exploreCourse returns false (meaning has a cycle) return empty array
+  for (let course = 0; course < numCourses; course++){
+      if (!exploreCourses (preMap, course, visited, cycle, result)) return [];
+  }
+
+  //if no cycle, return result created by exploreCourses
+  return result;
 };
 
 
