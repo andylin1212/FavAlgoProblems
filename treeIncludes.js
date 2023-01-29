@@ -35,3 +35,19 @@ function treeIncludes (root, target) {
   return false;
 }
 
+
+/* Solution 2: Depth First recursive
+O(n) time: exploring all nodes recursively
+O(n) space: at worst case will make n layers of recursive calls
+*/
+
+
+function treeIncludesRecurse (root, target) {
+  //null base case first
+  if (root === null) return false;
+  //found target value base case
+  if (root.val === target) return true;
+
+  //each node, if target value is in left OR right tree, then can return true
+  return treeIncludesRecurse(root.left, target) || treeIncludesRecurse(root.right, target)
+}
