@@ -8,7 +8,8 @@ You may assume that you have an infinite number of each kind of coin.
 
 
 /*
-Solution 1:
+Solution 1: recursion with memoization
+N is amount, c is coins.length
 O(N * c) time    for each amount, we do a for loop of all possible coins. memoizing for all possible amounts
 O(N) space       memoizing all possible amounts
 */
@@ -42,4 +43,31 @@ function coinChange (coins, amount, memo = {}) {
 };
 
 
+/*
+Solution 2: Dynammic programming
+N is amount, c is coins.length
+O(N * c) time    for each coin denomination, we iterate through 1 to the total amount
+O(N) space       creating coinsUsed array
+*/
+function coinChangeDP (coins, amount) {
+  if (amount === 0) return 0;
 
+  //create dp array of minCoinsUsed for each amount
+  let coinsUsed = new Array(amount + 1).fill(Infinity)
+  //0 ways to create 0 amount for the coins given
+  coinsUsed[0] = 0
+
+  //iterate through coin denominations
+  for (let coin of coins) {
+    //iterate through all possible amounts less than target amount starting at 1
+    for (let i = 1; i < coinsUsed.length; i++) {
+      //if amount is less than coin denom, just continue
+      if (coin > i) continue;
+      //update coinsUsed to minumum of 1. current coinUsed or 2. 1 + coinUsed of amount minus current coin denom
+      coinsUsed[i] = Math.min(coinsUsed[i], 1 + coinsUsed[i - coin]);
+    }
+  }
+
+  //if coinUsed[n] still infinity, means no possible combination
+  return coinsUsed[n] === Infinity ? -1 : coinsUsed[n];
+};
