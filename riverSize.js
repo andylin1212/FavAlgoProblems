@@ -14,4 +14,54 @@ Need to mark each part of river as "visited" to avoid double count
 */
 
 //O(wh) time -  explore all cells of the 2d matrix
-//O(wh) space
+//O(wh) space  - creating a visited set that might contain the whole matrix at worst case
+
+function riverSizes(matrix) {
+  let result = [];
+  let visited = new Set();
+
+  //traverse through matrix
+  for (let r = 0; r < matrix.length; r++) {
+    for (let c = 0; c < matrix[0].length; c++) {
+
+      //if we are on a part of river
+      if (matrix[r][c] === 1) {
+        //calculate whole river size and add to result
+        const size = countSize(matrix, r, c, visited)
+        result.push(size)
+      }
+    }
+  }
+
+  return result;
+}
+
+function countSize(matrix, r, c, visited) {
+  //check if current index is in bounds
+  const rowInbounds = r >= 0 && r < matrix.length;
+  const colInbounds = c >= 0 && c < matrix[0].length;
+
+  //if either row or col not inbounds, return size of 0
+  if (!rowInbounds || !colInbounds) return 0;
+
+  //if already visited, want to return 0;
+  if (visited.has(r + ',' + c)) return 0;
+
+  //if current cell is not part of river, return 0;
+  if (matrix[r][c] === 0) return 0;
+
+  //mark current cell as visited
+  visited.add(r + ',' + c);
+
+  //count this cell as a size 1 river
+  let count = 1;
+
+  //add to the count if any connecting parts of river are one cell above, below, left or right
+  count += countSize(matrix, r - 1, c, visited)
+  count += countSize(matrix, r + 1, c, visited)
+  count += countSize(matrix, r, c - 1, visited)
+  count += countSize(matrix, r, c + 1, visited)
+
+  //return the total size of this river, while marking all rivers as visited
+  return count;
+};
