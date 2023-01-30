@@ -13,6 +13,7 @@ Once a part of river is hit, explore the whole river and count its size
 Need to mark each part of river as "visited" to avoid double count
 */
 
+//Solution 1: with visited set
 //O(wh) time -  explore all cells of the 2d matrix
 //O(wh) space  - creating a visited set that might contain the whole matrix at worst case
 
@@ -63,5 +64,51 @@ function countSize(matrix, r, c, visited) {
   count += countSize(matrix, r, c + 1, visited)
 
   //return the total size of this river, while marking all rivers as visited
+  return count;
+};
+
+
+
+//Solution 2: no extra DS, no visited set
+//variation of above solution
+//O(wh) time: exploring all cells
+//O(wh) space: the input matrix
+
+function riverSizesWithoutSet(matrix) {
+  let result = [];
+
+  //traverse through matrix
+  for (let r = 0; r < matrix.length; r++) {
+    for (let c = 0; c < matrix[0].length; c++) {
+
+      //if we are on a part of river
+      if (matrix[r][c] === 1) {
+        //calculate whole river size and add to result
+        const size = countSizeWitoutSet(matrix, r, c)
+        result.push(size)
+      }
+    }
+  }
+  return result;
+}
+
+function countSizeWithoutSet(matrix, r, c) {
+  const rowInbounds = r >= 0 && r < matrix.length;
+  const colInbounds = c >= 0 && c < matrix[0].length;
+
+  if (!rowInbounds || !colInbounds) return 0;
+
+  //if current cell is not part of river, return 0. current cell might also be 0 because we already visited this cell and counted as part of river
+  if (matrix[r][c] === 0) return 0;
+
+  //mark current cell as visited, no visited set but mark as 0 to indicate dont need to count again when cell being explored second time.
+  matrix[r][c] = 0;
+
+  //below same as earlier solution
+  let count = 1;
+  count += countSize(matrix, r - 1, c)
+  count += countSize(matrix, r + 1, c)
+  count += countSize(matrix, r, c - 1)
+  count += countSize(matrix, r, c + 1)
   return count;
 };
