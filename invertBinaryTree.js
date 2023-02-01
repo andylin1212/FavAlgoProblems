@@ -27,6 +27,35 @@ function invertBinaryTree(tree) {
   return tree;
 }
 
+/*
+Solution 2: queue, BFS to invert each node
+O(n) time: visiting all nodes
+O(n) space: at worse all nodes can be in the queue
+*/
+
+function invertBinaryTreeQueue(tree) {
+  //initialize queue with root node
+  let queue = [tree]
+
+  //terminate case is when no more nodes in queue
+  while (queue.length) {
+    //shift the current queue, technically O(n) in JS
+    let current = queue.shift();
+
+    //if current node is null, move on to next node in queue
+    if (current === null) continue;
+
+    //swap the left and right tree of current node
+    [current.left, current.right] = [current.right, current.left]
+
+    //add left and right tree to queue
+    queue.push(current.left)
+    queue.push(current.right)
+  }
+
+  return tree;
+}
+
 
 //provided class
 class BinaryTree {
