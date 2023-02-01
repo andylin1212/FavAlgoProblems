@@ -8,7 +8,7 @@ You must solve this problem without using the library's sort function.
 Concept Check: understand what the problem is asking. Need to move all reds to beginning of list and blue to end of list in place, then white will be sorted too
 */
 
-//Solution 1:
+//Solution:
 //O(n) time:
 //O(1) space:  no extra data structure
 
@@ -24,14 +24,22 @@ function sortColors (nums) {
     //get current color
     const currColor = nums[pointer]
 
+    //if currColor is red
     if (currColor === 0) {
+      //swap the currColor to where the redIdx is suppose to be
       [nums[redIdx], nums[pointer]] = [nums[pointer], nums[redIdx]]
+      //move redIdx to next position where red should be
       redIdx++;
+      //traverse to next pointer
       pointer++;
+      //if currColor is white, just move on to next
     } else if (currColor === 1) {
       pointer++
+      //if currColor is blue
     } else {
+      //swap currColor to where blue is suppose to be
       [nums[blueIdx], nums[pointer]] = [nums[pointer], nums[blueIdx]]
+      //move blueIdx to next position where blue should be
       blueIdx--;
     }
   }
