@@ -12,3 +12,29 @@ Concept Check: understand what the problem is asking. Need to move all reds to b
 //O(n) time:
 //O(1) space:  no extra data structure
 
+function sortColors (nums) {
+  //initialize pointer to traverse through array
+  let pointer = 0;
+  //initialize red pointer at beginning and blue pointer at end of array
+  let redIdx = 0;
+  let blueIdx = nums.length - 1;
+
+  //while pointer is not greater than blue pointer
+  while (pointer <= blueIdx) {
+    //get current color
+    const currColor = nums[pointer]
+
+    if (currColor === 0) {
+      [nums[redIdx], nums[pointer]] = [nums[pointer], nums[redIdx]]
+      redIdx++;
+      pointer++;
+    } else if (currColor === 1) {
+      pointer++
+    } else {
+      [nums[blueIdx], nums[pointer]] = [nums[pointer], nums[blueIdx]]
+      blueIdx--;
+    }
+  }
+
+  return nums;
+}
