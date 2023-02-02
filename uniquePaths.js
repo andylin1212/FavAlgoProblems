@@ -32,3 +32,15 @@ function uniquePaths(m, n) {
   //return unique paths of bottom right block
   return grid[m - 1][n - 1]
 };
+
+//Solution 2: recursion, bad time complexity
+//O(2 ^(n + m)) time: at most, need n + m recursive calls to reach base case
+//O(n + m) space: max depth of the recursive call stack
+
+function uniquePathsRecurse(m, n) {
+  //base case if m - 1 === 0 || n - 1 === 0 the unique paths to get there from start is 1
+  if (m === 1|| n === 1) return 1
+
+  //return summation of paths to get to the block above current block and paths to get to the block to the left of current block
+  return uniquePathsRecurse(m - 1, n) + uniquePathsRecurse(m, n - 1)
+};
