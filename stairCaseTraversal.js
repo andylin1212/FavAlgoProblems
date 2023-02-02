@@ -33,7 +33,27 @@ function staircaseTraversal(height, maxSteps, visited = {}) {
 
 
 //Solution 2: iterative solution
+//O(n * k) time: where n is height and k is maxSteps
+//O(n) space: steps array is size of n height + 1
 function staircaseTraversal(height, maxSteps) {
+  //create steps array where last index is height
   let steps = new Array(height + 1).fill(0)
 
+  //base case, steps to get to height 0 and 1 is just 1
+  steps[0] = 1;
+  steps[1] = 1;
+
+  //starting at height 2 to target height
+  for (let h = 2; h <= height; h++) {
+    //iterate through possible amount of steps
+    for (let step = 1; step <= maxSteps; step++) {
+      //if not in range just continue
+      if (h - step < 0) continue;
+      //add ways to get to steps[h - step] to ways to current step
+      steps[h] += steps[h - step]
+    }
+  }
+
+  //return steps at that height
+  return steps[height]
 };
