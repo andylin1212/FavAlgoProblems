@@ -57,3 +57,27 @@ function staircaseTraversal(height, maxSteps) {
   //return steps at that height
   return steps[height]
 };
+
+//Solution 3: iterative solution, sliding window
+//O(n) time: traversing from 1 to height n
+//O(n) space: creating a waysToTop array of height n
+function staircaseTraversal(height, maxSteps) {
+  let currWays = 0;
+  let waysToTop = [1];
+
+  //iterate from 1 to height
+  for (let currHeight = 1; currHeight <= height; currHeight++) {
+    //find prevStart of window and end of window
+    let startOfPrevWindow = currHeight - maxSteps - 1;
+    let endOfWindow = currHeight - 1;
+
+    //if startOfPrevWindow >= 0, that means we are sliding window, and need to remove value at previous start
+    if (startOfPrevWindow >= 0) currWays -= waysToTop[startOfPrevWindow]
+
+    //add value at endOfWindow
+    currWays += waysToTop[endOfWindow];
+    //add to our array to keep track of ways to reach certain height
+    waysToTop.push(currWays)
+  }
+  return currWays;
+}
