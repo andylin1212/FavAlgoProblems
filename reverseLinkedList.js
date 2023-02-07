@@ -57,11 +57,15 @@ function reverseLinkedList(head) {
 //O(1) space: reversing in-place
 
 function reverseLinkedListRecursive(head, prev = null) {
-  //set the base case where
+  //set the base case where finish traversing linkedList, curr is null
   if (head === null) return prev;
 
+  //assign temp value next to next node
   const next = head.next;
+  //reverse current node
   head.next = prev;
+
+  //recursively call reverseLinkedList passing the next node in the traversal and linkedList that is reversed already
   return reverseLinkedListRecursive(next, head)
 }
 
