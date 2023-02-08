@@ -42,6 +42,23 @@ function mergeLinkedLists(headOne, headTwo) {
   return headOne.value < headTwo.value ? headOne : headTwo;
 }
 
+//Solution 2: recursive solution
+//O(n + m) time: n and m are the length of the two lists, at most n + m on the recursive stack
+//O(1) space: merge sorted linkedList in place
+
+function mergeLinkedListsRecursive(headOne, headTwo) {
+  //if either one of the linkedList is null, return the other list
+  if (!headOne || !headTwo) return (headOne || headTwo)
+  //if headOne value is less than, set the next of headOne to the mergedLinkedList of headOne.next and headTwo
+  if (headOne.value < headTwo.value) {
+    headOne.next = mergeLinkedListsRecursive(headOne.next, headTwo)
+    return headOne
+  //otherwise, set the next of headTwo to the mergedLinkedList of headOne and headTwo.next
+  } else {
+    headTwo.next = mergeLinkedListsRecursive(headOne, headTwo.next)
+    return headTwo
+  }
+}
 class LinkedList {
   constructor(value) {
     this.value = value;
