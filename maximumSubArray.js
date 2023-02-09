@@ -1,6 +1,5 @@
 /* Question
-Given an integer array nums, find the
-subarray with the largest sum, and return its sum.
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
 */
 
 /*O(n) time and O(1) space
