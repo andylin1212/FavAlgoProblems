@@ -16,10 +16,15 @@ Each BST node has a max and min allowed value, it can be determined by its paren
 //O(d) space: at most depth recursion calls in stack
 
 function isValidBST (root, max = Infinity, min = -Infinity) {
+  //base case, a null node is a valid BST
   if (root === null) return true;
 
+  //if current node val is greater than max or less than min, return false
   if (root.val >= max || root.val <= min) return false
 
+  //if above base cases not hit, need to finally make sure root.left and root.right are both valid BSTs
+  //for root.left node, it's max value is root.val and min doesnt change.
+  //for root.right node, its min value is root.val and max doesnt change
   return isValidBST(root.left, root.val, min) && isValidBST(root.right, max, root.val)
 }
 
