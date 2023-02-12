@@ -5,6 +5,12 @@ Concept check: two pointer
 move one pointer to node pointing at end of list(null) and other pointer nth node behind, then can remove specific node
 */
 
+/*
+Solution:
+O(n) time: traverse through linkedList
+O(1) space: no extra space
+*/
+
 function removeNthFromEnd (head, n) {
   //initialize counter and two pointers
   let counter = 1;
