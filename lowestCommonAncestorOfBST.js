@@ -9,10 +9,13 @@ According to the definition of LCA on Wikipedia: “The lowest common ancestor i
 //O(1) space: no extra space
 function lowestCommonAncestor (root, p, q) {
   while (root) {
+    //if both values less than root val, common ancestor somewhere in root left
     if (root.val > p.val && root.val > q.val) {
       root = root.left
+    //if both values greater than root val, common ancestor somewhere in root right
     } else if (root.val < p.val && root.val < q.val) {
       root = root.right
+    //otherwise, break since the root is the LCA
     } else {
       break;
     }
@@ -21,7 +24,20 @@ function lowestCommonAncestor (root, p, q) {
 }
 
 //Solution 2: Recursive
-
+//O(H) time: O(log n), H is height of tree
+//O(H) space: O(log n), H is height of tree, recursion stack
+function lowestCommonAncestorRecursion (root, p, q) {
+  //if both values less than root val, common ancestor somewhere in root left
+  if (root.val > p.val && root.val > q.val) {
+    return lowestCommonAncestorRecursion(root.left, p, q)
+  }
+  //if both values greater than root val, common ancestor somewhere in root right
+  if (root.val < p.val && root.val < q.val) {
+    return lowestCommonAncestorRecursion(root.right, p, q)
+  }
+  //otherwise root is the LCA
+  return root;
+}
 
 
 function TreeNode(val) {
