@@ -24,3 +24,24 @@ function permute (nums) {
 
   return result
 }
+
+//the above solution, do we actually have to create newNums each time?
+
+//Solution 2:
+//O(n * n!) time: upper bound - n * n! to the helper method
+//O(n * n!) space: store n! permutation in array, all permutations have length n
+
+function permuteTWO (nums, i = 0, result = []) {
+  //if at last index, can push copy of nums to result
+  if (i === nums.length - 1) {
+    result.push(nums.slice())
+  } else {
+    //starting at index 1, swap currIdx j and i, call function again and swap back
+    for (let j = i; j < nums.length; j++) {
+      [nums[i], nums[j]] = [nums[j], nums[i]]
+      permuteTWO(nums, i + 1, result)
+      [nums[i], nums[j]] = [nums[j], nums[i]]
+    }
+  }
+  return result
+}
