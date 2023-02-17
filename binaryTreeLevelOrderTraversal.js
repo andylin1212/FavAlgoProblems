@@ -5,7 +5,9 @@ Sample output: [[3],[9,20],[15,7]]
               each record is all nodes in a level
 */
 
-//Solution 1:
+//Solution 1 BFS with queue keeping track of level:
+//O(n) time: traversing all nodes
+//O(n) space: output array has n length items
 
 function levelOrder (root) {
   if (!root) return [];
@@ -14,7 +16,7 @@ function levelOrder (root) {
   let queue = [[root, 0]]
 
   while (queue.length > 0) {
-    const [currNode, currLevel] = queue.shift();
+    const [currNode, currLevel] = queue.shift(); //technically another O(n)
 
     if (!result[currLevel]) {
       result[currLevel] = []
@@ -28,8 +30,30 @@ function levelOrder (root) {
   return result
 }
 
-//Solution 2:
+//Solution 2: BFS, creating level array and pushing it to result
+//O(n) time: traversing all nodes
+//O(n) space: output array has n length items
 
+function levelOrderTwo (root) {
+  if (!root) return [];
+  let result = []
+  let queue = [root]
+
+  while (queue.length > 0) {
+    let qLength = queue.length;
+    let level = []
+
+    for (let i = 1; i <= qLength; i++) {
+      let currNode = queue.shift();
+      level.push(currNode.val)
+
+      if (currNode.left) queue.push(currNode.left)
+      if (currNode.right) queue.push(currNode.right)
+    }
+    result.push(level)
+  }
+  return result;
+}
 
 //Node function
 function TreeNode(val, left, right) {
