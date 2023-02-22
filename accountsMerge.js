@@ -20,4 +20,46 @@ We could return these lists in any order, for example the answer [['Mary', 'mary
 function accountsMerge = function(accounts) {
   const parents = {};
   const email2Name = {};
+
+  //create the find function
+  function find (val) {
+    if (parents[val] !== val) {
+      parents[val] = find(parents[val])
+    }
+    return parents[val]
+  }
+
+  //create union function
+  function union (valOne, valTwo) {
+    let valOneRoot = find(valOne);
+    let valTwoRoot = find(valTwo)
+    parents[valTwoRoot] = valOneRoot
+  }
+
+  //iterate throught all emails associated to name
+  for (const [name, ...emails] of accounts) {
+    //for each email
+    for (const email of emails) {
+      //if never appeared, add to disjoin set
+      if (!parents[email]) parents[email] = email
+      //set email to matching name
+      email2Name[email] = name
+      //union current email with first email under this name
+      union(email, emails[0])
+    }
+  }
+
+  const emails = {};
+  //for each email we encountered
+  for (const email of Object.keys(parents)) {
+    //find the root of the email
+    const parent = find(email)
+    //if not in our data strucutre, create a root
+    if (!(parent in emails)) emails[parent] = []
+    //add email to root
+    emails[parent].push(email)
+  }
+
+  //return each key value pair, mapping key to owner of email and emails in sorted order
+  return Object.entries(emails).map(([email, emails]) => [email2Name[email], ...emails.sort()])
 }
