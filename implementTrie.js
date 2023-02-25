@@ -43,6 +43,8 @@ Trie.prototype.insert = function(word) {
   curr.endOfWord = true;
 }
 
+//O(n) time: n is length of word
+//O(1) space: constant space
 Trie.prototype.search = function(word) {
   //initialize curr as root of trie
   let curr = this.root
@@ -59,6 +61,8 @@ Trie.prototype.search = function(word) {
   return curr.endOfWord
 };
 
+//O(m) time: m is length of prefix
+//O(1) space: constant space
 Trie.prototype.startsWith = function(prefix) {
   //initialize curr as root of trie
   let curr = this.root
