@@ -37,3 +37,31 @@ function combinationSum (candidates, target) {
   exploreCombo(0, target, [])
   return result
 };
+
+
+//Solution 2: Backtracking
+//main changes from solution 1 in comments below, implement backtracking
+function combinationSumBacktrack (candidates, target) {
+  let result = [];
+
+  function exploreCombo(index, target, currCombo) {
+    if (target < 0) return;
+    //need to add a copy of currCombo, cannot directly push currCombo because it is reference to currCombo array and in backtracking, we manipulate original currCombo array
+    if (target === 0) result.push([...currCombo])
+
+    for (let i = index; i < candidates.length; i++) {
+      const currCandidate = candidates[i]
+      const remainder = target - currCandidate
+
+      //add current candidate to currentCombo
+      currCombo.push(currCandidate)
+      //recursively call exploreCombo with remainder amount and reference to same currCombo array
+      exploreCombo(i, remainder, currCombo)
+      //remove added candidate from currentCombo for next iteration with alternate candidate
+      currCombo.pop()
+    }
+  }
+
+  exploreCombo(0, target, [])
+  return result
+};
