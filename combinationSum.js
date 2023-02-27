@@ -10,5 +10,20 @@ The test cases are generated such that the number of unique combinations that su
 
 //Solution 1:
 function combinationSum (candidates, target) {
+  let result = [];
 
+  function exploreCombo(index, target, currCombo) {
+    if (target < 0) return;
+    if (target === 0) result.push(currCombo)
+
+    for (let i = index; i < candidates.length; i++) {
+      const currCandidate = candidates[i]
+      const remainder = target - currCandidate
+      const newCombo = currCombo.concat(currCandidate)
+      exploreCombo(i, remainder, newCombo)
+    }
+  }
+
+  exploreCombo(0, target, [])
+  return result
 };
