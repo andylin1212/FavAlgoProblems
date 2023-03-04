@@ -8,6 +8,8 @@ do not double count when startR is same as endRow or startC is same as endC
 
 
 //Solution
+//O(n) time: total number of elements in the matrix
+//O(n) space: total number of elements in the matrix
 function spiralOrder (matrix) {
   //initialize variables to store result and keep track of traversal
   let result = [];
