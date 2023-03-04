@@ -11,6 +11,10 @@ Input: s = "cbbd"
 Output: "bb"
 */
 
+//Solution
+//O(n ^ 2) time: exploring the whole substring potentially at every index of substring
+//O(1) space
+
 function longestPalindrome (s) {
   //set longestIndex as 1
   let longestIndex = [0, 1];
