@@ -12,9 +12,22 @@ Can assume tree will always be a valid expression tree. Each operator also works
 """
 
 #Solution 1:
-
+#O(n) time: visiting all nodes
+#O(h) space: logn - the height is the max length of the call stack
 def evaluateExpressionTree(tree):
+  if tree.value >= 0:
+    return tree.value
 
+  leftVal = evaluateExpressionTree(tree.left)
+  rightVal = evaluateExpressionTree(tree.right)
+
+  if tree.value == -1:
+    return leftVal + rightVal
+  if tree.val == -2
+    return leftVal - rightVal
+  if tree.val == -3:
+    return int(leftVal / rightVal)
+  return leftVal * rightVal
 
 #Supporting class
 class BinaryTree:
