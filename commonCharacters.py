@@ -25,3 +25,32 @@ def commonChars(strings):
     if count == len(strings):
       finalChars.append(char)
   return finalChars
+
+  #Solution 2: start with shortest string, check if all strings have same characters as shortest string. Remove if don't
+
+  def commonChars(strings):
+    smallestString = getSmallestString(strings) #helper function to return string that has least amount of characters
+    potentialCommonChars = set(smallestString)  #create set for potential final result
+
+    #iterate through all strings and remove from potentialCommonChars all chars that are not found in EVERY string
+    for string in strings:
+      removeNonexistentChars(string, potentialCommonChars)
+
+    return list(potentialCommonChars)
+
+  def getSmallestString(strings):
+    smallestString = strings[0]
+    for string in strings:
+      if len(string) < len(smallestString):
+        smallestString = string
+    return smallestString
+
+  def removeNonexistentChars(string, potentialCommonChars):
+    #create set of unique characters
+    uniqueStringChars = set(string)
+
+    #we only need to check for each potentialCommonChars, dont need to check all characters in each string
+    for char in list(potentialCommonChars):
+      #remove from potentialCommonChars if character not found in this string
+      if char not in uniqueStringChars:
+        potentialCommonChars.remove(char)
