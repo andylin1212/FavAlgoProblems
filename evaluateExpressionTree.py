@@ -15,12 +15,16 @@ Can assume tree will always be a valid expression tree. Each operator also works
 #O(n) time: visiting all nodes
 #O(h) space: logn - the height is the max length of the call stack
 def evaluateExpressionTree(tree):
+  #if we reach positive value, return the value (all positive values are operands)
   if tree.value >= 0:
     return tree.value
 
+  #curr tree must be operator at this point
+  #know we need to evaluate left and right, recursively call function to obtain left and right values so bottom of tree is always evaluated first
   leftVal = evaluateExpressionTree(tree.left)
   rightVal = evaluateExpressionTree(tree.right)
 
+  #evaluate left and right value based on operator and return the value
   if tree.value == -1:
     return leftVal + rightVal
   if tree.val == -2
