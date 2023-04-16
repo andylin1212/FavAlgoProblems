@@ -21,8 +21,8 @@ def missingNumbers(nums):
   return solution
 
 #Solution 2: find the two numbers by getting expected total of whole array and then expected totals of the 2 halfs of the array
-#O(n) time:
-#O(1) space:
+#O(n) time: iterating through nums list (not nested loops)
+#O(1) space: no extra ds
 
 def missingNumbers(nums):
   #find the total sum of range 1 to nums + 2
@@ -48,3 +48,38 @@ def missingNumbers(nums):
   expectedSecondHalf = sum(range(averageMissingVal + 1, len(nums) + 3))
 
   return [expectedFirstHalf - foundFirstHalf, expectedSecondHalf - foundSecondHalf]
+
+#Solution 3: using Bit XOR
+#O(n) time: iterating through for loops
+#O(1) space: no extra DS just variable storage
+
+def missingNumbers(nums):
+  #XOR all values in nums, and also XOR all values we EXPECT in nums if no missing numbers
+  #find XOR in two missing numbers
+  solutionXOR = 0
+
+  for i in range(0, len(nums) + 3):
+    solutionXOR ^= i
+
+    if i < len(nums):
+      solutionXOR ^= nums[i]
+
+  #find bit that is Set in solution XOR, one number will be set, the other wont be
+  solution = [0, 0]
+  setBit = solutionXOR & -solutionXOR
+
+  #one number will be set in Setbit and the other wont
+  for i in range(0, len(nums) + 3):
+    if i & setBit == 0:
+      solution[0] ^= i
+    else:
+      solution[1] ^= i
+
+    if i < len(nums):
+      if nums[i] & setBit == 0:
+        solution[0] ^= nums[i]
+      else:
+        solution[1] ^= nums[i]
+
+  #sort our solution and return
+  return sorted(solution)
