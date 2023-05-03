@@ -6,7 +6,7 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 */
 
-//Solution
+//Solution 1
 //O(n) time: iterate through the days
 //O(1) space: no extra space
 
@@ -25,4 +25,36 @@ function maxProfit(prices) {
   }
 
   return maxProfit;
+}
+
+//Solution 2 - Sliding Window
+//O(n) time: traversing through array with sliding window pointers
+//O(1) space: no extra space
+
+function maxProfit(prices) {
+  //initialize maxProfit and 2 pointers
+  let maxP = 0;
+  let l = 0;
+  let r = 1;
+
+  //iterate through prices
+  while (r < prices.length) {
+    //define profit at current prices
+    const sellPrice = prices[r]
+    const buyPrice = prices[l]
+    const profit = sellPrice - buyPrice
+
+    //if profit is positive, compare it with current maxPrice
+    if (profit > 0) {
+      maxP = Math.max(maxP, profit)
+    //if profit not positive, we know sellPrice equal to or less than buyPrice
+    //sellPrice currently is local minimum, so we move left pointer to sellPrice (right pointer)
+    } else {
+      l = r
+    }
+    //increment right pointer by one
+    r++
+  }
+
+  return maxP
 }
