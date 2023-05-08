@@ -27,9 +27,9 @@ def evaluateExpressionTree(tree):
   #evaluate left and right value based on operator and return the value
   if tree.value == -1:
     return leftVal + rightVal
-  if tree.val == -2
+  if tree.value == -2:
     return leftVal - rightVal
-  if tree.val == -3:
+  if tree.value == -3:
     return int(leftVal / rightVal)
   return leftVal * rightVal
 
