@@ -22,3 +22,26 @@ Input: tokens = ["4","13","5","/","+"]
 Output: 6
 Explanation: (4 + (13 / 5)) = 6
 '''
+
+#Solution 1:
+#O(n) time: iterate through tokens, and utilize stack
+#O(n) space: at most n/2 tokens in stack
+
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack = []
+
+        for token in tokens:
+            if token == "+":
+                stack.append(stack.pop() + stack.pop())
+            elif token == "-":
+                a, b = stack.pop(), stack.pop()
+                stack.append(b - a)
+            elif token == "*":
+                stack.append(stack.pop() * stack.pop())
+            elif token == "/":
+                a, b = stack.pop(), stack.pop()
+                stack.append(int(b/a))
+            else:
+                stack.append(int(token))
+        return stack[-1]
