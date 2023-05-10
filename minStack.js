@@ -11,6 +11,7 @@ int getMin() retrieves the minimum element in the stack.
 You must implement a solution with O(1) time complexity for each function.
 */
 
+//MAIN CONCEPT: there is a local minimum at every element
 
 //Solution 1: storing a stack of objects
 
