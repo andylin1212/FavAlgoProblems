@@ -18,8 +18,8 @@ We could return these lists in any order, for example the answer [['Mary', 'mary
 //Solution: Union Find
 
 function accountsMerge = function(accounts) {
-  const parents = {};
-  const email2Name = {};
+  const parents = {}; //key email, value root email (disjoin set)
+  const email2Name = {};  //key email, value name of email
 
   //create the find function
   function find (val) {
