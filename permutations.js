@@ -34,10 +34,10 @@ function permute (nums) {
 function permuteTWO (nums, i = 0, result = []) {
   //if at last index, can push copy of nums to result
   if (i === nums.length - 1) {
-    result.push(nums.slice())
+    result.push(nums.slice())  //O(n) time
   } else {
     //starting at index 1, swap currIdx j and i, call function again and swap back
-    for (let j = i; j < nums.length; j++) {
+    for (let j = i; j < nums.length; j++) {  //O(n!) total n! permutations - n! calls to helper method
       [nums[i], nums[j]] = [nums[j], nums[i]]
       permuteTWO(nums, i + 1, result)
       [nums[i], nums[j]] = [nums[j], nums[i]]
