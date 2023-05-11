@@ -17,7 +17,7 @@ class Solution:
         time, fresh = 0, 0
         maxRow, maxCol = len(grid), len(grid[0])
 
-        #prework , to update fresh tomatoes and add rotten tomatoes to queue
+        #prework , to update fresh oranges and add rotten oranges to queue
         for r in range(maxRow):
             for c in range(maxCol):
                 if grid[r][c] == 1:
@@ -26,8 +26,8 @@ class Solution:
                     q.append([r, c])
 
         directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
-        #rotten tomatoes by batch and count up the minutes
-        #exit rotten tomatoes process when there are no more rotten tomatoes that hasn't been processed or there are no more fresh tomatoes
+        #rotten oranges by batch and count up the minutes
+        #exit rotten oranges process when there are no more rotten oranges that hasn't been processed or there are no more fresh oranges
         while q and fresh > 0:
             for i in range(len(q)):
                 r, c = q.popleft()
