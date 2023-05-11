@@ -3,7 +3,7 @@ Given an array nums of distinct integers, return all the possible permutations. 
 */
 
 //Solution 1:
-//O(n^2 * n!) time: upper bound - total n! permutations, n total calls to helper methods, n for newNums and newPerm
+//O(n^2 * n!) time: upper bound - total n! permutations, n! total calls to helper methods, n for newNums and newPerm
 //O(n * n!) space: store n! permutation in array, all permutations have length n
 function permute (nums) {
   //if no more num in nums and we appended to currPerm, add currPerm to result array
@@ -13,13 +13,13 @@ function permute (nums) {
   }
 
   //iterate through each num
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length; i++) {   //O(n) time
     //get remaining usable nums in newNums array (permutation cannot reuse current item)
     let newNums = [...nums.slice(0, i), ...nums.slice(i + 1)]
     //add curr num to the permutation
-    let newPerm = currPerm.concat([nums[i]])
+    let newPerm = currPerm.concat([nums[i]])   //O(n) time
     //call helper function for more calls to add to permutation
-    permute(newNums, newPerm, result)
+    permute(newNums, newPerm, result)  //O(n!) time: n! total calls to helper
   }
 
   return result
